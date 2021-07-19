@@ -7,13 +7,19 @@ from credentials import cred_user,cred_pass
 tftp_server = "10.11.16.27"
 folder="TCORE"
 
+path = ('D:\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
+ip_list = ('D:\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\' + folder + '\\ip_list.txt')
+outpath = path + "\\ip_log.txt"
+
+file = open(outpath, "w")
+file.close()
 
 def config(ip):
     device = {
     "device_type": "cisco_ios",
     "host": ip,
-    "username": "cred_user",
-    "password": "cred_pass",
+    "username": cred_user,
+    "password": cred_pass,
     }
 
     with ConnectHandler(**device) as net_connect:
@@ -38,8 +44,12 @@ def config(ip):
     print()
     print(output)
     print()
+    file = open(outpath, "a")
+    file.write(output + "\n")
+    file.close()
 
-with open('D:\\OneDrive - Tacocat\\Code\Cisco Python\\list.txt') as f:
+with open(ip_list) as f:
     lines = f.read().splitlines()
     for ip in lines:
-        config(ip)
+        config(ip)       
+        
