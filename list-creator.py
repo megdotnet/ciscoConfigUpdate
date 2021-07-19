@@ -2,6 +2,7 @@
 
 import os, re, shutil
 
+#user defined variables
 search= "ip address 10.11."
 folder = "TCORE"
 
