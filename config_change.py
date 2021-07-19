@@ -1,8 +1,9 @@
 #! python3
 from netmiko import Netmiko
 from netmiko import ConnectHandler
+from credentials import cred_user,cred_pass
 
-
+#user defined variables
 tftp_server = "10.11.16.27"
 folder="TCORE"
 
@@ -11,8 +12,8 @@ def config(ip):
     device = {
     "device_type": "cisco_ios",
     "host": ip,
-    "username": "fairbanksm",
-    "password": "Sch@ffer42",
+    "username": "cred_user",
+    "password": "cred_pass",
     }
 
     with ConnectHandler(**device) as net_connect:
