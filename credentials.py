@@ -1,4 +1,4 @@
 #! python3
 
-cred_user=""
-cred_pass=""
+cred_user="fairbanksm"
+cred_pass="Sch@ffer42"
