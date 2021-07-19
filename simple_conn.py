@@ -1,7 +1,7 @@
 #! python3
 from netmiko import Netmiko
-from credentials import cred_user,cred_pass
 from netmiko import ConnectHandler
+from credentials import cred_user,cred_pass
 
 def connection(ip):
     device = {
