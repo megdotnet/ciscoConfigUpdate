@@ -3,6 +3,10 @@ from netmiko import Netmiko
 from netmiko import ConnectHandler
 from credentials import cred_user,cred_pass
 
+folder="TCORE"
+path = ('C:\\users\\fairbanksm\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
+ip_list = (path + folder + '\\ip_list.txt')
+
 def connection(ip):
     device = {
         "device_type": "cisco_ios",
@@ -15,7 +19,9 @@ def connection(ip):
     net_connect.disconnect()
 
 #loop through the IP addresses in list.txt and test for connection
-with open('D:\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\list.txt') as f:
+with open(ip_list) as f:
     lines = f.read().splitlines()
-    for ip in lines:
+    for item in lines:
+        ip = item.split(" ")[0]
+        #print(ip)
         connection(ip)    

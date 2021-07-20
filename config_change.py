@@ -7,9 +7,9 @@ from credentials import cred_user,cred_pass
 tftp_server = "10.11.16.27"
 folder="TCORE"
 
-path = ('D:\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
-ip_list = ('D:\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\' + folder + '\\ip_list.txt')
-outpath = path + "\\ip_log.txt"
+path = ('C:\\users\\fairbanksm\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
+ip_list = (path + folder + '\\ip_list.txt')
+outpath = path + folder + '\\ip_log.txt'
 
 file = open(outpath, "w")
 file.close()
@@ -23,9 +23,12 @@ def config(ip):
     }
 
     with ConnectHandler(**device) as net_connect:
+        file = open(outpath, "a")
         #get the hostname
         output = net_connect.send_command("show run | inc hostname")
         hostname = output[9:]
+        print(hostname)
+        file.write(hostname + "\n")
         #get the current cli command and negate
         output = net_connect.send_command("show run | inc cli")    
         no_cli = "no" + output
@@ -36,20 +39,23 @@ def config(ip):
         #kill the old backup job and add the new one
         kron = "kron policy-list Backup"
         output = net_connect.send_config_set([kron, no_cli, new_cli])
+        print(output)
+        file.write(output)
         #run manual backup now
-        net_connect.send_command(backup)
+        output = net_connect.send_command(backup)
+        print("[manual backup] " + backup + "\n")
+        file.write("[manual backup] " + backup + "\n")
         #save config              
-        output += net_connect.save_config()
-
-    print()
-    print(output)
-    print()
-    file = open(outpath, "a")
-    file.write(output + "\n")
-    file.close()
+        output = net_connect.save_config()
+        print(output)
+        print("-----")
+        file.write(output + "\n")
+        file.write("----- \n")
+        file.close()
 
 with open(ip_list) as f:
     lines = f.read().splitlines()
-    for ip in lines:
+    for item in lines:
+        ip = item.split(" ")[0]
         config(ip)       
         
