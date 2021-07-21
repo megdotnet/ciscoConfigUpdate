@@ -1,0 +1,14 @@
+* add that one fuction for passwords
+* change credentials.py to global.py
+* edit list-creator, simple_conn, confi_change to use global.py
+* change ip_list to a .csv
+* can I add a ping test?
+* can I check for and handle duplicate entries in KRON
+* should I have it match the ip address of the old server before removing?
+
+072021.1 
+    added import getpass to simple_conn.py
+    removed plaintext password from globalvar.py
+    removed credentials.py from .gitignore
+    renamed credentiuals.py to globalvar.py
+    migrated some of the variables from simple_conn to global_var

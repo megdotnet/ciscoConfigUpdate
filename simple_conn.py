@@ -1,10 +1,9 @@
 #! python3
 from netmiko import Netmiko
 from netmiko import ConnectHandler
-from credentials import cred_user,cred_pass
+from getpass import getpass
+from global_var import *
 
-folder="TCORE"
-path = ('C:\\users\\fairbanksm\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
 ip_list = (path + folder + '\\ip_list.txt')
 
 def connection(ip):
@@ -12,7 +11,7 @@ def connection(ip):
         "device_type": "cisco_ios",
         "host": ip,
         "username": cred_user,
-        "password": cred_pass,
+        "password": getpass()
     }
     net_connect = ConnectHandler(**device)
     print(net_connect.find_prompt())
