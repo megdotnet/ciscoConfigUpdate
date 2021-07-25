@@ -1,17 +1,15 @@
 #! python3
-from netmiko import Netmiko
-from netmiko import ConnectHandler
-from getpass import getpass
+
 from global_var import *
 
-ip_list = (path + folder + '\\ip_list.txt')
+cred_pass = getpass()
 
-def connection(ip):
+def connection(ip, cred_pass):
     device = {
         "device_type": "cisco_ios",
         "host": ip,
         "username": cred_user,
-        "password": getpass()
+        "password": cred_pass
     }
     net_connect = ConnectHandler(**device)
     print(net_connect.find_prompt())
@@ -21,6 +19,6 @@ def connection(ip):
 with open(ip_list) as f:
     lines = f.read().splitlines()
     for item in lines:
-        ip = item.split(" ")[0]
-        #print(ip)
-        connection(ip)    
+        ip = item.split(" ")[1]
+        connection(ip,cred_pass)   
+        print(ip)
