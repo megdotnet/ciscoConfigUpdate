@@ -1,10 +1,16 @@
-* add that one fuction for passwords
-* change credentials.py to global.py
-* edit list-creator, simple_conn, confi_change to use global.py
+- add that one fuction for passwords
+- change credentials.py to global_var.py
+- edit list-creator, simple_conn, confi_change to use global_var.py
 * change ip_list to a .csv
-* can I add a ping test?
+- can I add a ping test?
 * can I check for and handle duplicate entries in KRON
 * should I have it match the ip address of the old server before removing?
+* create confirm.py to just pull the current cli job from the hardware
+* need to be able to add the kron job to switches that don't already have it. 
+* sort out github nonsense
+* change the kron time so they're not all sending at once.  Maybe use a random number generator. 
+
+
 
 072021.1 
     added import getpass to simple_conn.py
@@ -12,3 +18,14 @@
     removed credentials.py from .gitignore
     renamed credentiuals.py to globalvar.py
     migrated some of the variables from simple_conn to global_var
+
+072401.1
+    .gitignore          added subfolers
+    config_change       changed to use global_var.py
+    global_var          changed path to use onedrive environmantal variables
+    list_creator        added ping test
+    list_creator_new    reworked the list_creator to clean up the nested ifs 
+    simple_conn         changed to use global_var.py
+    
+
+
