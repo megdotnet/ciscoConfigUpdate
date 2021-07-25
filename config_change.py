@@ -1,17 +1,13 @@
 #! python3
-from netmiko import Netmiko
-from netmiko import ConnectHandler
-from credentials import cred_user,cred_pass
+
+from global_var import *
+
+cred_pass = getpass()
 
 #user defined variables
-tftp_server = "10.11.16.27"
-folder="TCORE"
+tftp_server = "10.11.192.27"
 
-path = ('C:\\users\\fairbanksm\\OneDrive - Tacocat\\Code\\git\\ciscoConfigUpdate\\')
-ip_list = (path + folder + '\\ip_list.txt')
-outpath = path + folder + '\\ip_log.txt'
-
-file = open(outpath, "w")
+file = open(ip_log, "w")
 file.close()
 
 def config(ip):
@@ -23,7 +19,7 @@ def config(ip):
     }
 
     with ConnectHandler(**device) as net_connect:
-        file = open(outpath, "a")
+        file = open(ip_log, "a")
         #get the hostname
         output = net_connect.send_command("show run | inc hostname")
         hostname = output[9:]
@@ -56,6 +52,6 @@ def config(ip):
 with open(ip_list) as f:
     lines = f.read().splitlines()
     for item in lines:
-        ip = item.split(" ")[0]
+        ip = item.split(" ")[1]
         config(ip)       
         

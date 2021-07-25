@@ -131,4 +131,7 @@ dmypy.json
 list.txt
 credentials.py
 /TCORE
+/FBGP
+/TCHOST
+/DFW
 ip_log.txt
