@@ -1,23 +1,34 @@
 #! python3
+
 from getpass import getpass
 from netmiko import ConnectHandler
 import os
 
-#FEY
-#path = "D:\\OneDrive - Tacocat\\Code\\ciscoConfigUpdate\\"
 
-#FAIRBANKSM3  
-#path = ('C:\\users\\fairbanksm\\OneDrive - Tacocat\\Code\\ciscoConfigUpdate\\')
+folder=""
 
-#onedrive_path = os.environ.get('onedrive')
-#print(onedrive_path)
+path = ("C:\\TFTP-Root\\")
 
-path = (os.environ.get('onedrive') + "\\code\\ciscoConfigUpdate\\")
-
-cred_user="tcore"
-folder="TCORE"
 project_path = (path + folder)
-ip_list = (project_path + "\\ip_list.txt")
-ip_log = (project_path + "\\ip_log.txt")
+ip_list = (project_path + "\\_ip_list.csv")
+ip_log = (project_path + "\\_ip_log.txt")
+ip_confirm = (project_path + "\\_show_kron.txt")
+ip_conn = (project_path + "\\_ip_conn.csv")
+ip_kron = (project_path + "\\_ip_kron.csv")
 
+def folder_confirm():
+    print(" Current folder: " + project_path)
+    reply = input("(y) to continue: ")
+    if reply == 'y' or reply == "Y":
+        return True
 
+def get_hostname(lines):
+    for item in lines:
+        if "hostname" in item.strip(): 
+            hostname = str(item.split(" ")[1])
+            return hostname
+
+def out_log(message,out_path):
+    file = open(out_path, "a")
+    print(message)
+    file.write(message + "\n")
